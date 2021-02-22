@@ -1,0 +1,32 @@
+# COMPILED
+*.o
+*.a
+*.gcda
+*.gcno
+*.so
+# !COMPILED
+
+# BINARY
+a.out
+binaryname
+unit_tests
+# !BINARY
+
+# TEMPORARY
+*#*
+*~
+*.vscode*
+# !TEMPORARY
+
+# MY_THINGS
+.notes
+
+file
+log
+oui
+ok
+# !MY_THINGS
+
+# ACTUAL PROJECT
+
+# !ACTUAL PROJECT
