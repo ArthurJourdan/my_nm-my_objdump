@@ -45,7 +45,9 @@ SRC_DIR		=	./src/
 NM_DIR		=	$(SRC_DIR)nm/
 
 SRC_NM			=	${NM_DIR}main.c	\
-				# ${SRC_DIR}example.c
+					${NM_DIR}error_handling.c	\
+					${NM_DIR}check_file.c	\
+				# ${NM_DIR}example.c
 
 OBJ_NM			=	$(SRC_NM:.c=.o)
 
@@ -54,7 +56,7 @@ NAME_NM		=	my_nm
 OBJDUMP_DIR	=	$(SRC_DIR)objdump/
 
 SRC_OBJDUMP			=	${OBJDUMP_DIR}main.c	\
-				# ${SRC_DIR}example.c
+				# ${OBJDUMP_DIR}example.c
 
 OBJ_OBJDUMP			=	$(SRC_OBJDUMP:.c=.o)
 
@@ -161,10 +163,12 @@ lib_clean:
 
 clean:		lib_clean
 			$(RM) $(RM_FLAGS)
-			$(RM) $(OBJ) \
-			&& @($(MSG_CLEAN)$(NAME)$(DEFAULT))
-			$(RM) $(TEST_OBJ) \
-			&& @($(MSG_CLEAN)$(TEST_NAME)$(DEFAULT))
+			$(RM) $(OBJ_NM)
+			@($(MSG_CLEAN)$(NAME_NM)$(DEFAULT))
+			$(RM) $(OBJ_OBJDUMP)
+			@($(MSG_CLEAN)$(NAME_OBJDUMP)$(DEFAULT))
+			$(RM) $(TEST_OBJ)
+			@($(MSG_CLEAN)$(TEST_NAME)$(DEFAULT))
 			@($(ECHO))
 			@($(ECHO))
 
@@ -173,11 +177,11 @@ lib_fclean:
 				make fclean -C $$MAKE_PATH -s ; \
 			done
 
-fclean:		lib_fclean
-			$(RM) $(OBJ)
-			$(RM) $(RM_FLAGS)
-			$(RM) $(NAME)
-			@($(MSG_FCLEAN)$(NAME)$(DEFAULT))
+fclean:		lib_fclean clean
+			$(RM) $(NAME_NM)
+			@($(MSG_FCLEAN)$(NAME_NM)$(DEFAULT))
+			$(RM) $(NAME_OBJDUMP)
+			@($(MSG_FCLEAN)$(NAME_OBJDUMP)$(DEFAULT))
 			$(RM) $(TEST_NAME)
 			@($(MSG_FCLEAN)$(TEST_NAME)$(DEFAULT))
 			@($(ECHO))
