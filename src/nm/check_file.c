@@ -7,22 +7,30 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include "file.h"
 #include "error_handling.h"
 
-bool file_open_check(char const *filepath)
+bool check_file(const char *filepath, int fd, struct stat *stats)
 {
-    if (!is_file_openable(filepath)) {
-        if (errno == ENOENT)
-            print_nm_error(get_error(FILE_NOT_FOUND), filepath);
+    if (fstat(fd, stats) == -1) {
+        return false;
+    }
+    if ((stats->st_mode & S_IFMT) == S_IFDIR) {
+        print_nm_error(get_error(FILE_IS_DIR), filepath);
         return false;
     }
     return true;
 }
 
-bool file_check(char const *filepath)
+int open_file(const char *filepath)
 {
-    if (!file_open_check(filepath))
-        return false;
-    return true;
+    int fd = open(filepath, O_RDONLY);
+
+    if (fd == -1) {
+        if (errno == ENOENT)
+            print_nm_error(get_error(FILE_NOT_FOUND), filepath);
+        return -1;
+    }
+    return fd;
 }

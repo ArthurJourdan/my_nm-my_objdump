@@ -13,7 +13,8 @@
 typedef enum error_identifier
 {
     FILE_NOT_FOUND,
-    WRONG_FILE_FORMAT
+    WRONG_FILE_FORMAT,
+    FILE_IS_DIR
 } errorId;
 
 struct err_id_msg

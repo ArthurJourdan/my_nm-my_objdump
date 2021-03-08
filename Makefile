@@ -44,21 +44,32 @@ SRC_DIR		=	./src/
 
 NM_DIR		=	$(SRC_DIR)nm/
 
-SRC_NM			=	${NM_DIR}main.c	\
+MAIN_NM			=	${NM_DIR}main.c
+
+SRC_NM			=	\
+					${NM_DIR}main_nm.c	\
 					${NM_DIR}error_handling.c	\
 					${NM_DIR}check_file.c	\
+					${NM_DIR}load_file.c	\
+					${NM_DIR}check_file_format.c	\
+					${NM_DIR}parse_file.c	\
+					${NM_DIR}print_symbols.c	\
 				# ${NM_DIR}example.c
 
 OBJ_NM			=	$(SRC_NM:.c=.o)
+OBJ_NM			+=	$(MAIN_NM:.c=.o)
 
 NAME_NM		=	my_nm
 
 OBJDUMP_DIR	=	$(SRC_DIR)objdump/
 
-SRC_OBJDUMP			=	${OBJDUMP_DIR}main.c	\
+MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
+
+SRC_OBJDUMP			=		\
 				# ${OBJDUMP_DIR}example.c
 
 OBJ_OBJDUMP			=	$(SRC_OBJDUMP:.c=.o)
+OBJ_OBJDUMP			+=	$(MAIN_OBJDUMP:.c=.o)
 
 NAME_OBJDUMP		=	my_objdump
 ## Source
@@ -100,7 +111,8 @@ TEST_FLAGS	=   --coverage -lcriterion
 
 TEST_DIR	=	./tests/
 
-TEST_FILES	=		\
+TEST_FILES	=	$(TEST_DIR)criterion_utils.c	\
+				$(TEST_DIR)file_load_tests.c	\
 				#  $(TEST_DIR)unit_tests.c
 
 TEST_OBJ	=	$(SRC_NM:.c=.o)
@@ -189,7 +201,7 @@ fclean:		lib_fclean clean
 
 re:		 fclean all
 
-tests_run:	lib $(TEST_OBJ)
+tests_run:	fclean lib $(TEST_OBJ)
 			@$(ECHO)
 			$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(TEST_FLAGS) $(LD_FLAGS) \
 			&& ($(MSG_BUILD_SUCCESS) $(NAME)$(DEFAULT)) \

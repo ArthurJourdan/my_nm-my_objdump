@@ -9,8 +9,10 @@
 #include "my.h"
 #include "error_handling.h"
 
-static const struct err_id_msg errors[] = {{FILE_NOT_FOUND, "No such file"},
-    {WRONG_FILE_FORMAT, "file format not recognized"}};
+static const struct err_id_msg errors[] = {
+    {FILE_NOT_FOUND, "'%s': No such file"},
+    {WRONG_FILE_FORMAT, "%s: file format not recognized"},
+    {FILE_IS_DIR, "Warning: '%s' is a directory"}};
 
 const char *get_error(errorId id)
 {
@@ -26,8 +28,10 @@ void print_nm_error(const char *message, const char *arg)
 {
     if (!message)
         return;
+    fprintf(stderr, "nm: ");
     if (arg)
-        fprintf(stderr, "nm: %s: %s\n", arg, message);
+        fprintf(stderr, message, arg);
     else
-        fprintf(stderr, "nm: %s\n", message);
+        fprintf(stderr, "%s", message);
+    fprintf(stderr, "\n");
 }
