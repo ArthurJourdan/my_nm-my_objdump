@@ -42,12 +42,23 @@ RM			=	@rm -rf
 ## Source
 SRC_DIR		=	./src/
 
-SRC			=	${SRC_DIR}main.c	\
+NM_DIR		=	$(SRC_DIR)nm/
+
+SRC_NM			=	${NM_DIR}main.c	\
 				# ${SRC_DIR}example.c
 
-OBJ			=	$(SRC:.c=.o)
+OBJ_NM			=	$(SRC_NM:.c=.o)
 
-NAME		=	executable
+NAME_NM		=	my_nm
+
+OBJDUMP_DIR	=	$(SRC_DIR)objdump/
+
+SRC_OBJDUMP			=	${OBJDUMP_DIR}main.c	\
+				# ${SRC_DIR}example.c
+
+OBJ_OBJDUMP			=	$(SRC_OBJDUMP:.c=.o)
+
+NAME_OBJDUMP		=	my_objdump
 ## Source
 
 ## Library
@@ -68,6 +79,17 @@ LIBRARIES   =	$(SRC_LIB:%=-l%)
 LD_FLAGS	=	-L$(LIB_DIR) $(LIBRARIES)
 ## !Library
 
+## Shared Library
+# SHARED_LIB
+SHARED_LIB_NAME	=	libnm.so
+
+SHARED_LIB_DIR	=	./src/
+
+SHARED_LIB_SRC	=	$(SHARED_LIB_DIR)file.c	\
+					# $(SHARED_LIB_DIR)example.c	\
+
+SHARED_LIB_OBJ	=	$(SHARED_LIB_SRC:.c=.o)
+## !Shared Library
 
 ## Tests
 TEST_NAME	=	unit_tests
@@ -76,14 +98,12 @@ TEST_FLAGS	=   --coverage -lcriterion
 
 TEST_DIR	=	./tests/
 
-TEST_SRC	=		\
-				# ${SRC_DIR}example.c
-
 TEST_FILES	=		\
 				#  $(TEST_DIR)unit_tests.c
 
-TEST_OBJ	+=	$(TEST_SRC:.c=.o)
-TEST_OBJ	=	$(TEST_FILES:.c=.o)
+TEST_OBJ	=	$(SRC_NM:.c=.o)
+TEST_OBJ	+=	$(SRC_OBJDUMP:.c=.o)
+TEST_OBJ	+=	$(TEST_FILES:.c=.o)
 ## !Tests
 ## !Aliases
 
@@ -107,28 +127,39 @@ MSG_FCLEAN	=	$(ECHO) $(BOLD) $(GREEN)✓" FULL CLEAN "
 ## !Messages
 
 
-all:		$(NAME)
+all:		nm objdump
 
+nm:			lib  $(OBJ_NM)
+			@$(ECHO)
+			$(MSG_POST_BUILD)
+			@$(ECHO)
+			$(CC) -o $(NAME_NM) $(OBJ_NM) $(LD_FLAGS) \
+			&& ($(MSG_BUILD_SUCCESS) $(NAME_NM)$(DEFAULT)) \
+			|| ($(MSG_BUILD_FAILURE) $(NAME_NM)$(DEFAULT))
+			@($(ECHO))
+			@($(ECHO))
+
+objdump:	lib  $(OBJ_OBJDUMP)
+			@$(ECHO)
+			$(MSG_POST_BUILD)
+			@$(ECHO)
+			$(CC) -o $(NAME_OBJDUMP) $(OBJ_OBJDUMP) $(LD_FLAGS) \
+			&& ($(MSG_BUILD_SUCCESS) $(NAME_OBJDUMP)$(DEFAULT)) \
+			|| ($(MSG_BUILD_FAILURE) $(NAME_OBJDUMP)$(DEFAULT))
+			@($(ECHO))
+			@($(ECHO))
 lib:
 			@$(ECHO)
 			@for MAKE_PATH in $(LIB_PATHS) ; do \
 				make -C $$MAKE_PATH -s ; \
 			done
 
-$(NAME):	lib  $(OBJ)
-			@$(ECHO)
-			$(MSG_POST_BUILD)
-			@$(ECHO)
-			$(CC) -o  $(NAME) $(OBJ) $(LD_FLAGS) \
-			&& ($(MSG_BUILD_SUCCESS) $(NAME)$(DEFAULT)) \
-			|| ($(MSG_BUILD_FAILURE) $(NAME)$(DEFAULT))
-			@($(ECHO))
-			@($(ECHO))
-
-clean:
+lib_clean:
 			@for MAKE_PATH in $(LIB_PATHS) ; do \
 				make clean -C $$MAKE_PATH -s ; \
 			done
+
+clean:		lib_clean
 			$(RM) $(RM_FLAGS)
 			$(RM) $(OBJ) \
 			&& @($(MSG_CLEAN)$(NAME)$(DEFAULT))
@@ -137,10 +168,12 @@ clean:
 			@($(ECHO))
 			@($(ECHO))
 
-fclean:
+lib_fclean:
 			@for MAKE_PATH in $(LIB_PATHS) ; do \
 				make fclean -C $$MAKE_PATH -s ; \
 			done
+
+fclean:		lib_fclean
 			$(RM) $(OBJ)
 			$(RM) $(RM_FLAGS)
 			$(RM) $(NAME)
@@ -152,7 +185,7 @@ fclean:
 
 re:		 fclean all
 
-tests_run:	fclean lib $(TEST_OBJ)
+tests_run:	lib $(TEST_OBJ)
 			@$(ECHO)
 			$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(TEST_FLAGS) $(LD_FLAGS) \
 			&& ($(MSG_BUILD_SUCCESS) $(NAME)$(DEFAULT)) \
@@ -168,6 +201,21 @@ tests_run:	fclean lib $(TEST_OBJ)
 debug:		C_FLAGS += -g
 debug:		re
 
+shared_lib:	C_FLAGS += -fPIC
+shared_lib:	$(SHARED_LIB_OBJ)
+			@$(ECHO)
+			$(CC) -shared -o $(SHARED_LIB_NAME) $(SHARED_LIB_OBJ) \
+			&& $(MSG_BUILD_SUCCESS) \
+			|| $(MSG_BUILD_FAILURE)
+			@$(ECHO)
+
+re_shared_lib:	fclean shared_lib
+
+shared:	shared_lib
+shared:	LD_FLAGS += -L. -l:./$(SHARED_LIB_NAME)
+shared:	$(NAME)
+
+re_shared:	fclean shared
 
 %.o :		%.c
 			$(CC) -c -o $@ $^ $(C_FLAGS) \

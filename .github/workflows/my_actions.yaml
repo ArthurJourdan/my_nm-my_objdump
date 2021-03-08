@@ -6,28 +6,24 @@ on:
       - master
 
 jobs:
-
   Build:
     runs-on: ubuntu-latest
     name: Building
 
     steps:
       - uses: actions/checkout@v2
+      - name: Compile project
+        run: |
+          make
+      - name: Clean project
+        run: |
+          make clean
+      - name: Full clean and compile project
+        run: |
+          make re
       - name: Full clean project
         run: |
-          make fclean -C my_c_caneva/
-      - name: Test_ Compile project
-        run: |
-          make -C my_c_caneva/
-
-  Coding-style:
-    runs-on: ubuntu-latest
-    name: Checking coding style
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check epitech coding style
-        uses: jidicula/clang-format-action@master
+          make fclean
 
   Unit-test:
     needs: build
@@ -35,16 +31,15 @@ jobs:
     name: Testing
 
     steps:
-      - name: install criterion and gcovr
+      - name: Install criterion and gcovr
         run: |
           sudo add-apt-repository ppa:snaipewastaken/ppa
           sudo apt update
           sudo apt install criterion-dev gcovr
       - uses: actions/checkout@v2
-      - name: Test_ compile and launch tests
+      - name: Compile and launch tests
         run: |
-          make tests_run -C my_c_caneva/
-
+          make tests_run
   # # push-epitech:
   # #   needs: build
   # #   runs-on: ubuntu-latest

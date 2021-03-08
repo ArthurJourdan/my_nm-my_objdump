@@ -4,6 +4,8 @@
 *.gcda
 *.gcno
 *.so
+samples
+functionnal_tests
 # !COMPILED
 
 # BINARY
