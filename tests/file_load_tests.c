@@ -22,7 +22,7 @@ Test(load_file, basic_load, .timeout = timeout, .disabled = MY_DISABLEMENT,
 
     cr_assert_not_null(my_address);
     cr_assert_neq(my_address, MAP_FAILED);
-    cr_assert_neq(check_object_type(my_address), true);
+    cr_assert_neq(check_object_type(my_address), false);
 }
 
 Test(load_file, directory, .timeout = timeout, .disabled = MY_DISABLEMENT,

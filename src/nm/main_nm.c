@@ -8,8 +8,12 @@
 #include "my.h"
 #include "nm.h"
 
-bool my_nm_architecture(void *address)
+bool my_nm_architecture(void *file_address)
 {
+    bool (*my_function)(void *) = get_function_of_archi(file_address);
+
+    if (!my_function)
+        return false;
     return true;
 }
 
@@ -20,7 +24,7 @@ bool my_nm(const char *filepath)
 
     if (!file_is_object(filepath, my_file_address))
         return false;
-    parse_file(my_file_address);
+    my_nm_architecture(my_file_address);
     release_file(my_file_address, my_stats);
     return true;
 }

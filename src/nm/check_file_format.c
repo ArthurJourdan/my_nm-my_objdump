@@ -27,15 +27,17 @@ bool file_is_object(const char *filepath, void *file_address)
     return true;
 }
 
-bool check_object_type(Elf64_Ehdr *header)
+bool check_object_type(void *header)
 {
-    if (strncmp((const char *) header->e_ident, ELFMAG, SELFMAG)) {
+    Elf32_Ehdr *my_header = header;
+
+    if (strncmp((const char *) my_header->e_ident, ELFMAG, SELFMAG)) {
         return false;
     }
     for (size_t my_type = 0; my_type < ARRAY_SIZE(accepted_types); my_type++) {
-        if (header->e_type == accepted_types[my_type]) {
-            return false;
+        if (my_header->e_type == accepted_types[my_type]) {
+            return true;
         }
     }
-    return true;
+    return false;
 }

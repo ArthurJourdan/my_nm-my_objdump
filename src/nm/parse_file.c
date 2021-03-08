@@ -19,7 +19,5 @@ bool parse_file(void *address)
     // my_header->e_shentsize);
     // printf("SSection header string table index = %08x\n",
     // my_header->e_shstrndx);
-    if (!check_object_type(my_header))
-        return false;
     return true;
 }
