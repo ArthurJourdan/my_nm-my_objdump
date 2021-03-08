@@ -99,7 +99,7 @@ SHARED_LIB_NAME	=	libnm.so
 
 SHARED_LIB_DIR	=	./src/
 
-SHARED_LIB_SRC	=	$(SHARED_LIB_DIR)file.c	\
+SHARED_LIB_SRC	=		\
 					# $(SHARED_LIB_DIR)example.c	\
 
 SHARED_LIB_OBJ	=	$(SHARED_LIB_SRC:.c=.o)
@@ -114,6 +114,7 @@ TEST_DIR	=	./tests/
 
 TEST_FILES	=	$(TEST_DIR)criterion_utils.c	\
 				$(TEST_DIR)file_load_tests.c	\
+				$(TEST_DIR)file_architecture_tests.c	\
 				#  $(TEST_DIR)unit_tests.c
 
 TEST_OBJ	=	$(SRC_NM:.c=.o)

@@ -11,6 +11,7 @@ bool nm_64(void *header)
 {
     return true;
 }
+
 bool nm_32(void *header)
 {
     return true;
