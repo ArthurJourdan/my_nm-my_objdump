@@ -10,6 +10,8 @@ functionnal_tests
 
 # BINARY
 a.out
+my_nm
+my_objdump
 binaryname
 unit_tests
 # !BINARY
