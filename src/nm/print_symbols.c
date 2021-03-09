@@ -7,11 +7,19 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include "nm.h"
 
 void print_symbol(symbol_t to_print)
 {
-    printf("%016li %c %s\n", to_print.address, to_print.type, to_print.name);
+    if (to_print.type == '?' || !to_print.name || !strlen(to_print.name))
+        return;
+    if (to_print.address)
+        printf("%016li", to_print.address);
+    else {
+        printf("\t\t");
+    }
+    printf(" %c %s\n", to_print.type, to_print.name);
 }
 
 void print_symbols(symbol_t *symbols, size_t symbol_nb)

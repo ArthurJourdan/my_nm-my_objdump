@@ -41,6 +41,8 @@ int get_file_architecture(void *header);
 
 char get_symbol_char(Elf64_Sym sym, Elf64_Shdr *shdr);
 
+void sort_symbols_by_name(symbol_t *symbols, size_t nb_symbols);
+
 void print_symbols(symbol_t *symbols, size_t symbol_nb);
 void print_symbol(symbol_t to_print);
 

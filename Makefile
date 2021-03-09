@@ -57,6 +57,7 @@ SRC_NM			=	\
 					${NM_DIR}nm_32b.c	\
 					${NM_DIR}nm_64b.c	\
 					${NM_DIR}get_symbol_char.c	\
+					${NM_DIR}sort_symbol_names.c	\
 					${NM_DIR}print_symbols.c	\
 				# ${NM_DIR}example.c
 

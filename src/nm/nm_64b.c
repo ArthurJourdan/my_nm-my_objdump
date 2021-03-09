@@ -32,15 +32,15 @@ symbol_t get_symbol(Elf64_Ehdr *header, Elf64_Shdr *section_header,
 }
 
 symbol_t *get_symbols(Elf64_Ehdr *header, Elf64_Shdr *section_header,
-    Elf64_Shdr *symbol_table, size_t symbol_nb)
+    Elf64_Shdr *symbol_table, size_t nb_symbols)
 {
     Elf64_Sym *my_symbols =
         (Elf64_Sym *) ((size_t) header + symbol_table->sh_offset);
-    symbol_t *my_syms_print = calloc(sizeof(symbol_t), symbol_nb);
+    symbol_t *my_syms_print = calloc(sizeof(symbol_t), nb_symbols);
 
     if (!my_syms_print)
         return NULL;
-    for (size_t i = 1; i < symbol_nb; i++) {
+    for (size_t i = 1; i < nb_symbols; i++) {
         my_syms_print[i] =
             get_symbol(header, section_header, symbol_table, my_symbols[i]);
     }
@@ -63,13 +63,15 @@ bool nm_64(void *header)
     Elf64_Shdr *my_sections =
         (Elf64_Shdr *) ((size_t) header + my_header->e_shoff);
     Elf64_Shdr *my_symbol_table = get_symbol_table(my_header, my_sections);
-    size_t my_symbol_nb = get_nb_symbols(my_symbol_table);
+    size_t my_nb_symbols = get_nb_symbols(my_symbol_table);
     symbol_t *my_syms_print = NULL;
 
     if (!my_symbol_table)
         return false;
     my_syms_print =
-        get_symbols(header, my_sections, my_symbol_table, my_symbol_nb);
-    print_symbols(my_syms_print, my_symbol_nb);
+        get_symbols(header, my_sections, my_symbol_table, my_nb_symbols);
+    sort_symbols_by_name(my_syms_print, my_nb_symbols);
+    print_symbols(my_syms_print, my_nb_symbols);
+    free(my_syms_print);
     return true;
 }
