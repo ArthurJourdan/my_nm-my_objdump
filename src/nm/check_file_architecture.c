@@ -7,16 +7,6 @@
 
 #include "nm.h"
 
-bool nm_64(void *header)
-{
-    return true;
-}
-
-bool nm_32(void *header)
-{
-    return true;
-}
-
 void *get_function_of_archi(void *header)
 {
     int my_architecture = get_file_architecture(header);

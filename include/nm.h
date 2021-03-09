@@ -15,6 +15,13 @@
 #include <elf.h>
 #include <fcntl.h>
 
+typedef struct symbol_printing_infos
+{
+    size_t address;
+    char type;
+    char *name;
+} symbol_t;
+
 bool my_nms(int ac, char const *filepaths[]);
 bool my_nm(const char *filepath);
 
@@ -32,8 +39,9 @@ bool nm_32(void *header);
 void *get_function_of_archi(void *header);
 int get_file_architecture(void *header);
 
-bool parse_file(void *address);
+char get_symbol_char(Elf64_Sym sym, Elf64_Shdr *shdr);
 
-void print_symbol(const void *address, const char type, const char *value);
+void print_symbols(symbol_t *symbols, size_t symbol_nb);
+void print_symbol(symbol_t to_print);
 
 #endif /* !NM_H_ */

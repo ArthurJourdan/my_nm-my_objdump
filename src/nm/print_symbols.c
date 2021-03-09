@@ -7,9 +7,19 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include "nm.h"
 
-inline void print_symbol(
-    const void *address, const char type, const char *value)
+void print_symbol(symbol_t to_print)
 {
-    printf("%016li %c %s\n", (size_t) address, type, value);
+    printf("%016li %c %s\n", to_print.address, to_print.type, to_print.name);
+}
+
+void print_symbols(symbol_t *symbols, size_t symbol_nb)
+{
+    size_t i = 0;
+
+    while (i < symbol_nb) {
+        print_symbol(symbols[i]);
+        i++;
+    }
 }
