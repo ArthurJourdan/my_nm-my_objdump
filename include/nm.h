@@ -39,7 +39,8 @@ bool nm_32(void *header);
 void *get_function_of_archi(void *header);
 int get_file_architecture(void *header);
 
-char get_symbol_char(Elf64_Sym sym, Elf64_Shdr *shdr);
+char get_symbol_char_64(Elf64_Sym sym, Elf64_Shdr *shdr);
+char get_symbol_char_32(Elf32_Sym sym, Elf32_Shdr *shdr);
 
 void sort_symbols_by_name(symbol_t *symbols, size_t nb_symbols);
 

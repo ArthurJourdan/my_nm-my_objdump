@@ -16,7 +16,7 @@ static size_t get_nb_symbols(Elf64_Shdr *symbol_table)
         return 0;
 }
 
-symbol_t get_symbol(Elf64_Ehdr *header, Elf64_Shdr *section_header,
+static symbol_t get_symbol(Elf64_Ehdr *header, Elf64_Shdr *section_header,
     Elf64_Shdr *symbol_table, Elf64_Sym symbol)
 {
     symbol_t my_sym_print;
@@ -26,12 +26,12 @@ symbol_t get_symbol(Elf64_Ehdr *header, Elf64_Shdr *section_header,
         + section_header[symbol_table->sh_link].sh_offset);
     my_sym_name = &my_sym_name[symbol.st_name];
     my_sym_print.address = symbol.st_value;
-    my_sym_print.type = get_symbol_char(symbol, section_header);
+    my_sym_print.type = get_symbol_char_64(symbol, section_header);
     my_sym_print.name = my_sym_name;
     return my_sym_print;
 }
 
-symbol_t *get_symbols(Elf64_Ehdr *header, Elf64_Shdr *section_header,
+static symbol_t *get_symbols(Elf64_Ehdr *header, Elf64_Shdr *section_header,
     Elf64_Shdr *symbol_table, size_t nb_symbols)
 {
     Elf64_Sym *my_symbols =
@@ -47,7 +47,7 @@ symbol_t *get_symbols(Elf64_Ehdr *header, Elf64_Shdr *section_header,
     return my_syms_print;
 }
 
-Elf64_Shdr *get_symbol_table(Elf64_Ehdr *header, Elf64_Shdr *sections)
+static Elf64_Shdr *get_symbol_table(Elf64_Ehdr *header, Elf64_Shdr *sections)
 {
     for (size_t i = 0; i < header->e_shnum; i++) {
         if (sections[i].sh_type == SHT_SYMTAB) {
