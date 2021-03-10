@@ -39,6 +39,9 @@ bool my_nms(int ac, char const *filepaths[])
 
     if (ac > 2)
         print_filepath = true;
+    else if (ac == 1) {
+        filepaths[ac++] = "a.out";
+    }
     for (int my_ac = 1; my_ac < ac; my_ac++) {
         if (!my_nm(print_filepath, filepaths[my_ac])) {
             exit_value = false;
