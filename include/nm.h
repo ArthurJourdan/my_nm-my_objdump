@@ -23,7 +23,7 @@ typedef struct symbol_printing_infos
 } symbol_t;
 
 bool my_nms(int ac, char const *filepaths[]);
-bool my_nm(const char *filepath);
+bool my_nm(bool print_filepath, const char *filepath);
 
 void release_file(void *address, struct stat stats);
 void *load_file(const char *filepath, struct stat *stats);

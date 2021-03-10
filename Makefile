@@ -53,7 +53,6 @@ SRC_NM			=	\
 					${NM_DIR}load_file.c	\
 					${NM_DIR}check_file_format.c	\
 					${NM_DIR}check_file_architecture.c	\
-					${NM_DIR}parse_file.c	\
 					${NM_DIR}nm_32b.c	\
 					${NM_DIR}nm_64b.c	\
 					${NM_DIR}get_symbol_char.c	\

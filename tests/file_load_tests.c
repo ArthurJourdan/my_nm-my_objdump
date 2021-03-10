@@ -58,7 +58,7 @@ Test(load_file, file_format_unknown, .timeout = timeout,
     char *my_format = "nm: %s: file format not recognized\n";
     char *my_expected;
 
-    cr_assert_eq(my_nm(my_file), false);
+    cr_assert_eq(my_nm(false, my_file), false);
     asprintf(&my_expected, my_format, my_file);
     cr_assert_stderr_eq_str(my_expected);
 }
