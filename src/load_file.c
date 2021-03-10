@@ -6,7 +6,7 @@
 */
 
 #include "my.h"
-#include "nm.h"
+#include "file_memory.h"
 
 void release_file(void *address, struct stat stats)
 {

@@ -43,7 +43,10 @@ RM			=	@rm -rf
 SRC_DIR		=	./src/
 
 COMMON_SRC	=	${SRC_DIR}error_handling.c	\
-				${SRC_DIR}check_file.c
+				${SRC_DIR}check_file.c	\
+				${SRC_DIR}load_file.c	\
+				${SRC_DIR}check_file_format.c	\
+				${SRC_DIR}get_file_architecture.c	\
 
 NM_DIR			=	$(SRC_DIR)nm/
 
@@ -51,9 +54,7 @@ MAIN_NM			=	${NM_DIR}main.c
 
 SRC_NM			=	\
 					${NM_DIR}main_nm.c	\
-					${NM_DIR}load_file.c	\
-					${NM_DIR}check_file_format.c	\
-					${NM_DIR}check_file_architecture.c	\
+					${NM_DIR}get_function_architecture.c	\
 					${NM_DIR}nm_32b.c	\
 					${NM_DIR}nm_64b.c	\
 					${NM_DIR}get_symbol_char_32b.c	\

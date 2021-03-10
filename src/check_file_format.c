@@ -6,12 +6,13 @@
 */
 
 #include "my.h"
-#include "nm.h"
 #include "error_handling.h"
+#include "file_memory.h"
 
 static const int accepted_types[3] = {ET_REL, ET_EXEC, ET_DYN};
 
-bool file_is_object(const char *filepath, void *file_address)
+bool file_is_object(
+    const char *prog_name, const char *filepath, void *file_address)
 {
     if (!file_address) {
         return false;
@@ -21,7 +22,7 @@ bool file_is_object(const char *filepath, void *file_address)
         return false;
     }
     if (!check_object_type(file_address)) {
-        print_error("nm", get_error(WRONG_FILE_FORMAT), filepath);
+        print_error(prog_name, get_error(WRONG_FILE_FORMAT), filepath);
         return false;
     }
     return true;

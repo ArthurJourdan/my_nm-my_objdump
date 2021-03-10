@@ -1,11 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** check_file_architecture.c
+** get_function_architecture.c
 ** File description:
 ** check and get the file architecture, aka number of bits
 */
 
 #include "nm.h"
+#include "file_memory.h"
 
 void *get_function_of_archi(void *header)
 {
@@ -17,11 +18,4 @@ void *get_function_of_archi(void *header)
         return &nm_32;
     }
     return NULL;
-}
-
-int get_file_architecture(void *header)
-{
-    Elf32_Ehdr *address = header;
-
-    return address->e_ident[EI_CLASS];
 }
