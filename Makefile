@@ -42,14 +42,15 @@ RM			=	@rm -rf
 ## Source
 SRC_DIR		=	./src/
 
-NM_DIR		=	$(SRC_DIR)nm/
+COMMON_SRC	=	${SRC_DIR}error_handling.c	\
+				${SRC_DIR}check_file.c
+
+NM_DIR			=	$(SRC_DIR)nm/
 
 MAIN_NM			=	${NM_DIR}main.c
 
 SRC_NM			=	\
 					${NM_DIR}main_nm.c	\
-					${NM_DIR}error_handling.c	\
-					${NM_DIR}check_file.c	\
 					${NM_DIR}load_file.c	\
 					${NM_DIR}check_file_format.c	\
 					${NM_DIR}check_file_architecture.c	\
@@ -61,19 +62,21 @@ SRC_NM			=	\
 					${NM_DIR}print_symbols.c	\
 				# ${NM_DIR}example.c
 
-OBJ_NM			=	$(SRC_NM:.c=.o)
+OBJ_NM			=	$(COMMON_SRC:.c=.o)
+OBJ_NM			+=	$(SRC_NM:.c=.o)
 OBJ_NM			+=	$(MAIN_NM:.c=.o)
 
-NAME_NM		=	my_nm
+NAME_NM			=	my_nm
 
-OBJDUMP_DIR	=	$(SRC_DIR)objdump/
+OBJDUMP_DIR			=	$(SRC_DIR)objdump/
 
 MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
 
 SRC_OBJDUMP			=		\
 				# ${OBJDUMP_DIR}example.c
 
-OBJ_OBJDUMP			=	$(SRC_OBJDUMP:.c=.o)
+OBJ_OBJDUMP			=	$(COMMON_SRC:.c=.o)
+OBJ_OBJDUMP			+=	$(SRC_OBJDUMP:.c=.o)
 OBJ_OBJDUMP			+=	$(MAIN_OBJDUMP:.c=.o)
 
 NAME_OBJDUMP		=	my_objdump
@@ -121,7 +124,8 @@ TEST_FILES	=	$(TEST_DIR)criterion_utils.c	\
 				$(TEST_DIR)file_architecture_tests.c	\
 				#  $(TEST_DIR)unit_tests.c
 
-TEST_OBJ	=	$(SRC_NM:.c=.o)
+TEST_OBJ	=	$(COMMON_SRC:.c=.o)
+TEST_OBJ	+=	$(SRC_NM:.c=.o)
 TEST_OBJ	+=	$(SRC_OBJDUMP:.c=.o)
 TEST_OBJ	+=	$(TEST_FILES:.c=.o)
 ## !Tests

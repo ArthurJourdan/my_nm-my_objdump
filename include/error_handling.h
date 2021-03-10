@@ -24,6 +24,6 @@ struct err_id_msg
 };
 
 const char *get_error(errorId id);
-void print_nm_error(const char *message, const char *arg);
+void print_error(const char *prog_name, const char *message, const char *arg);
 
 #endif /* !ERROR_HANDLING_H */

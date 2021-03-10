@@ -24,11 +24,12 @@ const char *get_error(errorId id)
     return NULL;
 }
 
-void print_nm_error(const char *message, const char *arg)
+void print_error(const char *prog_name, const char *message, const char *arg)
 {
     if (!message)
         return;
-    fprintf(stderr, "nm: ");
+    if (prog_name)
+        fprintf(stderr, "%s: ", prog_name);
     if (arg)
         fprintf(stderr, message, arg);
     else

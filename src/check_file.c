@@ -17,7 +17,7 @@ bool check_file(const char *filepath, int fd, struct stat *stats)
         return false;
     }
     if ((stats->st_mode & S_IFMT) == S_IFDIR) {
-        print_nm_error(get_error(FILE_IS_DIR), filepath);
+        print_error("nm", get_error(FILE_IS_DIR), filepath);
         return false;
     }
     return true;
@@ -29,7 +29,7 @@ int open_file(const char *filepath)
 
     if (fd == -1) {
         if (errno == ENOENT)
-            print_nm_error(get_error(FILE_NOT_FOUND), filepath);
+            print_error("nm", get_error(FILE_NOT_FOUND), filepath);
         return -1;
     }
     return fd;

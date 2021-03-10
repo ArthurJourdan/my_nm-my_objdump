@@ -21,7 +21,7 @@ bool file_is_object(const char *filepath, void *file_address)
         return false;
     }
     if (!check_object_type(file_address)) {
-        print_nm_error(get_error(WRONG_FILE_FORMAT), filepath);
+        print_error("nm", get_error(WRONG_FILE_FORMAT), filepath);
         return false;
     }
     return true;
