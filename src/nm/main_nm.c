@@ -9,16 +9,6 @@
 #include "nm.h"
 #include "file_memory.h"
 
-bool my_nm_architecture(void *file_address)
-{
-    bool (*my_function)(void *) = get_function_of_archi(file_address);
-
-    if (!my_function)
-        return false;
-    my_function(file_address);
-    return true;
-}
-
 bool my_nm(bool print_filepath, const char *filepath)
 {
     struct stat my_stats;
@@ -28,7 +18,7 @@ bool my_nm(bool print_filepath, const char *filepath)
         return false;
     if (print_filepath)
         printf("\n%s:\n", filepath);
-    my_nm_architecture(my_file_address);
+    launch_architecture(my_file_address);
     release_file(my_file_address, my_stats);
     return true;
 }

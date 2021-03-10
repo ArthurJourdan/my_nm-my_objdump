@@ -74,7 +74,8 @@ OBJDUMP_DIR			=	$(SRC_DIR)objdump/
 MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
 
 SRC_OBJDUMP			=		\
-				# ${OBJDUMP_DIR}example.c
+						${OBJDUMP_DIR}main_objdump.c	\
+						# ${OBJDUMP_DIR}example.c
 
 OBJ_OBJDUMP			=	$(COMMON_SRC:.c=.o)
 OBJ_OBJDUMP			+=	$(SRC_OBJDUMP:.c=.o)

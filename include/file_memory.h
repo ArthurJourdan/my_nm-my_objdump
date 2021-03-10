@@ -25,5 +25,7 @@ bool file_is_object(
 bool check_object_type(void *header);
 
 int get_file_architecture(void *header);
+void *get_function_of_archi(void *header);
+bool launch_architecture(void *file_address);
 
 #endif /* FILE_MEMORY_H */

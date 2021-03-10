@@ -25,7 +25,6 @@ bool my_nm(bool print_filepath, const char *filepath);
 
 bool nm_64(void *header);
 bool nm_32(void *header);
-void *get_function_of_archi(void *header);
 
 char get_symbol_char_64(Elf64_Sym sym, Elf64_Shdr *shdr);
 char get_symbol_char_32(Elf32_Sym sym, Elf32_Shdr *shdr);
