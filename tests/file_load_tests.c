@@ -10,6 +10,7 @@
 #include "test.h"
 #include "my.h"
 #include "nm.h"
+#include "file_memory.h"
 
 static const unsigned short timeout = 2;
 

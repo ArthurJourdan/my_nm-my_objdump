@@ -10,6 +10,7 @@
 #include "test.h"
 #include "my.h"
 #include "nm.h"
+#include "file_memory.h"
 
 static const unsigned short timeout = 2;
 
@@ -21,7 +22,7 @@ Test(file_archi, basic, .timeout = timeout, .disabled = MY_DISABLEMENT,
     void *my_address = load_file(my_file, &my_stats);
     bool (*my_function)(void *);
 
-    if (!my_address || !file_is_object(my_file, my_address))
+    if (!my_address || !file_is_object("nm", my_file, my_address))
         cr_skip_test();
     my_function = get_function_of_archi(my_address);
     cr_assert_not_null(my_function);
