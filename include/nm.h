@@ -23,6 +23,8 @@ typedef struct symbol_printing_infos
 bool my_nms(int ac, char const *filepaths[]);
 bool my_nm(bool print_filepath, const char *filepath);
 
+bool launch_architecture_nm(void *file_address);
+
 bool nm_64(void *header);
 bool nm_32(void *header);
 

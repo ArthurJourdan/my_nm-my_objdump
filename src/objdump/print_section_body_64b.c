@@ -9,7 +9,7 @@
 #include "objdump.h"
 #include "objdump.h"
 
-static void print_16_bytes(Elf32_Ehdr *header, Elf32_Shdr *act_section,
+static void print_16_bytes(Elf64_Ehdr *header, Elf64_Shdr *act_section,
     size_t act_offset, void (*print)(size_t, size_t, uint8_t *, size_t))
 {
     uint8_t *my_line = (uint8_t *) ((size_t) header + act_offset);
@@ -21,7 +21,7 @@ static void print_16_bytes(Elf32_Ehdr *header, Elf32_Shdr *act_section,
 }
 
 static void print_line(
-    Elf32_Ehdr *header, Elf32_Shdr *act_section, size_t act_offset)
+    Elf64_Ehdr *header, Elf64_Shdr *act_section, size_t act_offset)
 {
     printf(" %04x", (unsigned int) act_offset);
     print_16_bytes(header, act_section, act_offset, print_hexa);
@@ -30,7 +30,7 @@ static void print_line(
     printf("\n");
 }
 
-void print_section_body_32(Elf32_Ehdr *header, Elf32_Shdr *act_section)
+void print_section_body_64(Elf64_Ehdr *header, Elf64_Shdr *act_section)
 {
     size_t my_offset = (size_t)(act_section->sh_offset);
     size_t my_section_end = (size_t)(my_offset + act_section->sh_size);

@@ -19,7 +19,7 @@ bool my_nm(bool print_filepath, const char *filepath)
         return false;
     if (print_filepath)
         printf("\n%s:\n", filepath);
-    launch_architecture(my_file_address);
+    launch_architecture_nm(my_file_address);
     release_file(my_file_address, my_stats);
     return true;
 }

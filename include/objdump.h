@@ -23,6 +23,8 @@ typedef struct symbol_printing_infos
 bool my_objdumps(int ac, char const *filepaths[]);
 bool my_objdump(const char *filepath);
 
+bool launch_architecture_objdump(void *file_address);
+
 bool objdump_64(void *header);
 bool objdump_32(void *header);
 

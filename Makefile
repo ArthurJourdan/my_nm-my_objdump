@@ -131,7 +131,6 @@ TEST_DIR	=	./tests/
 
 TEST_FILES	=	$(TEST_DIR)criterion_utils.c	\
 				$(TEST_DIR)file_load_tests.c	\
-				$(TEST_DIR)file_architecture_tests.c	\
 				#  $(TEST_DIR)unit_tests.c
 
 TEST_OBJ	=	$(COMMON_SRC:.c=.o)

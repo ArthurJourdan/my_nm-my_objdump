@@ -8,7 +8,7 @@
 #include "nm.h"
 #include "file_memory.h"
 
-void *get_function_of_archi(void *header)
+static void *get_function_of_archi(void *header)
 {
     int my_architecture = get_file_architecture(header);
 
@@ -18,4 +18,14 @@ void *get_function_of_archi(void *header)
         return &nm_32;
     }
     return NULL;
+}
+
+bool launch_architecture_nm(void *file_address)
+{
+    bool (*my_function)(void *) = get_function_of_archi(file_address);
+
+    if (!my_function)
+        return false;
+    my_function(file_address);
+    return true;
 }
