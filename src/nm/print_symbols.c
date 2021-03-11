@@ -15,7 +15,7 @@ void print_symbol(symbol_t to_print)
     if (to_print.type == '?' || !to_print.name || !strlen(to_print.name))
         return;
     if (to_print.address)
-        printf("%016li", to_print.address);
+        printf("%016lx", to_print.address);
     else {
         printf("\t\t");
     }
