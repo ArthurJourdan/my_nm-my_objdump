@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "objdump.h"
 
-char *get_section_name(
+char *get_section_name_64(
     Elf64_Ehdr *header, Elf64_Shdr *sections, Elf64_Shdr *act_section)
 {
     char *my_section_name =
@@ -18,10 +18,10 @@ char *get_section_name(
     return my_section_name;
 }
 
-void print_section_name(
+void print_section_name_64(
     Elf64_Ehdr *header, Elf64_Shdr *sections, Elf64_Shdr *act_section)
 {
-    char *my_section_name = get_section_name(header, sections, act_section);
+    char *my_section_name = get_section_name_64(header, sections, act_section);
 
     printf("Contents of section %s:\n", my_section_name);
 }

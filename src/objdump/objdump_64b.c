@@ -11,8 +11,8 @@
 static void print_section(
     Elf64_Ehdr *header, Elf64_Shdr *sections, Elf64_Shdr *act_section)
 {
-    print_section_name(header, sections, act_section);
-    print_section_body(header, act_section);
+    print_section_name_64(header, sections, act_section);
+    print_section_body_64(header, act_section);
 }
 
 static Elf64_Shdr *print_sections(Elf64_Ehdr *header)

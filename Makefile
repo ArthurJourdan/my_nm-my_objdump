@@ -54,7 +54,7 @@ MAIN_NM			=	${NM_DIR}main.c
 
 SRC_NM			=	\
 					${NM_DIR}main_nm.c	\
-					${NM_DIR}get_function_architecture.c	\
+					${NM_DIR}get_function_architecture_nm.c	\
 					${NM_DIR}nm_32b.c	\
 					${NM_DIR}nm_64b.c	\
 					${NM_DIR}get_symbol_char_32b.c	\
@@ -75,10 +75,14 @@ MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
 
 SRC_OBJDUMP			=		\
 						${OBJDUMP_DIR}main_objdump.c	\
-						${OBJDUMP_DIR}get_function_architecture.c	\
+						${OBJDUMP_DIR}get_function_architecture_objdump.c	\
 						${OBJDUMP_DIR}objdump_64b.c	\
-						${OBJDUMP_DIR}print_section_name.c	\
+						${OBJDUMP_DIR}objdump_32b.c	\
+						${OBJDUMP_DIR}print_section_name_64b.c	\
+						${OBJDUMP_DIR}print_section_name_32b.c	\
 						${OBJDUMP_DIR}print_section_body.c	\
+						${OBJDUMP_DIR}print_section_body_64b.c	\
+						${OBJDUMP_DIR}print_section_body_32b.c	\
 						# ${OBJDUMP_DIR}example.c
 
 OBJ_OBJDUMP			=	$(COMMON_SRC:.c=.o)

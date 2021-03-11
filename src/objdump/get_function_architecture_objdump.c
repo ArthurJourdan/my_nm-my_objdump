@@ -15,7 +15,7 @@ void *get_function_of_archi(void *header)
     if (my_architecture == ELFCLASS64) {
         return &objdump_64;
     } else if (my_architecture == ELFCLASS32) {
-        // return &objdump_32;
+        return &objdump_32;
         return NULL;
     }
     return NULL;
