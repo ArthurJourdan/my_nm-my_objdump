@@ -92,36 +92,6 @@ OBJ_OBJDUMP			+=	$(MAIN_OBJDUMP:.c=.o)
 NAME_OBJDUMP		=	my_objdump
 ## Source
 
-## Library
-LIB_DIR		=	./lib/
-
-SRC_LIB		=	linked_list	\
-				print		\
-				my			\
-				file		\
-
-LIB_PATHS	=   $(LIB_DIR)lib_my			\
-				$(LIB_DIR)lib_file			\
-				$(LIB_DIR)lib_linked_list	\
-				$(LIB_DIR)lib_print			\
-
-LIBRARIES   =	$(SRC_LIB:%=-l%)
-
-LD_FLAGS	=	-L$(LIB_DIR) $(LIBRARIES)
-## !Library
-
-## Shared Library
-# SHARED_LIB
-SHARED_LIB_NAME	=	libnm.so
-
-SHARED_LIB_DIR	=	./src/
-
-SHARED_LIB_SRC	=		\
-					# $(SHARED_LIB_DIR)example.c	\
-
-SHARED_LIB_OBJ	=	$(SHARED_LIB_SRC:.c=.o)
-## !Shared Library
-
 ## Tests
 TEST_NAME	=	unit_tests
 
@@ -181,18 +151,8 @@ objdump:	$(OBJ_OBJDUMP)
 			|| ($(MSG_BUILD_FAILURE) $(NAME_OBJDUMP)$(DEFAULT))
 			@($(ECHO))
 			@($(ECHO))
-lib:
-			@$(ECHO)
-			@for MAKE_PATH in $(LIB_PATHS) ; do \
-				make -C $$MAKE_PATH -s ; \
-			done
 
-lib_clean:
-			@for MAKE_PATH in $(LIB_PATHS) ; do \
-				make clean -C $$MAKE_PATH -s ; \
-			done
-
-clean:		lib_clean
+clean:
 			$(RM) $(RM_FLAGS)
 			$(RM) $(OBJ_NM)
 			@($(MSG_CLEAN)$(NAME_NM)$(DEFAULT))
@@ -203,12 +163,7 @@ clean:		lib_clean
 			@($(ECHO))
 			@($(ECHO))
 
-lib_fclean:
-			@for MAKE_PATH in $(LIB_PATHS) ; do \
-				make fclean -C $$MAKE_PATH -s ; \
-			done
-
-fclean:		lib_fclean clean
+fclean:		clean
 			$(RM) $(NAME_NM)
 			@($(MSG_FCLEAN)$(NAME_NM)$(DEFAULT))
 			$(RM) $(NAME_OBJDUMP)
@@ -235,22 +190,6 @@ tests_run:	fclean lib $(TEST_OBJ)
 
 debug:		C_FLAGS += -g
 debug:		re
-
-shared_lib:	C_FLAGS += -fPIC
-shared_lib:	$(SHARED_LIB_OBJ)
-			@$(ECHO)
-			$(CC) -shared -o $(SHARED_LIB_NAME) $(SHARED_LIB_OBJ) \
-			&& $(MSG_BUILD_SUCCESS) \
-			|| $(MSG_BUILD_FAILURE)
-			@$(ECHO)
-
-re_shared_lib:	fclean shared_lib
-
-shared:	shared_lib
-shared:	LD_FLAGS += -L. -l:./$(SHARED_LIB_NAME)
-shared:	$(NAME)
-
-re_shared:	fclean shared
 
 %.o :		%.c
 			$(CC) -c -o $@ $^ $(C_FLAGS) \

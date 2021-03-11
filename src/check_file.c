@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include "file.h"
+#include <fcntl.h>
 #include "error_handling.h"
 
 bool check_file(const char *filepath, int fd, struct stat *stats)
