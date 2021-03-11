@@ -16,7 +16,7 @@ static void print_16_bytes(Elf32_Ehdr *header, Elf32_Shdr *act_section,
     size_t my_section_end = act_section->sh_offset + act_section->sh_size;
 
     for (size_t i = 0; i < 16; i++) {
-        print(my_section_end, act_offset, my_line, i);
+        print(act_offset, my_section_end, my_line, i);
     }
 }
 
