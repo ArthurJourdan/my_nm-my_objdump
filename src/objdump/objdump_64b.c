@@ -21,6 +21,9 @@ static Elf64_Shdr *print_sections(Elf64_Ehdr *header)
         (Elf64_Shdr *) ((size_t) header + header->e_shoff);
 
     for (size_t i = 1; i < header->e_shnum; i++) {
+        if (my_sections[i].sh_type == SHT_SYMTAB
+            || my_sections[i].sh_type == SHT_STRTAB)
+            continue;
         print_section(header, my_sections, &my_sections[i]);
     }
     return NULL;

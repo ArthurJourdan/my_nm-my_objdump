@@ -163,21 +163,21 @@ MSG_FCLEAN	=	$(ECHO) $(BOLD) $(GREEN)✓" FULL CLEAN "
 
 all:		nm objdump
 
-nm:			lib  $(OBJ_NM)
+nm:			$(OBJ_NM)
 			@$(ECHO)
 			$(MSG_POST_BUILD)
 			@$(ECHO)
-			$(CC) -o $(NAME_NM) $(OBJ_NM) $(LD_FLAGS) \
+			$(CC) -o $(NAME_NM) $(OBJ_NM) \
 			&& ($(MSG_BUILD_SUCCESS) $(NAME_NM)$(DEFAULT)) \
 			|| ($(MSG_BUILD_FAILURE) $(NAME_NM)$(DEFAULT))
 			@($(ECHO))
 			@($(ECHO))
 
-objdump:	lib  $(OBJ_OBJDUMP)
+objdump:	$(OBJ_OBJDUMP)
 			@$(ECHO)
 			$(MSG_POST_BUILD)
 			@$(ECHO)
-			$(CC) -o $(NAME_OBJDUMP) $(OBJ_OBJDUMP) $(LD_FLAGS) \
+			$(CC) -o $(NAME_OBJDUMP) $(OBJ_OBJDUMP) \
 			&& ($(MSG_BUILD_SUCCESS) $(NAME_OBJDUMP)$(DEFAULT)) \
 			|| ($(MSG_BUILD_FAILURE) $(NAME_OBJDUMP)$(DEFAULT))
 			@($(ECHO))
