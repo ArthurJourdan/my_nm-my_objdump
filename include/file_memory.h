@@ -15,10 +15,12 @@
 #include <fcntl.h>
 
 void release_file(void *address, struct stat stats);
-void *load_file(const char *filepath, struct stat *stats);
+void *load_file(
+    char const *prog_name, const char *filepath, struct stat *stats);
 
-bool check_file(const char *filepath, int fd, struct stat *stats);
-int open_file(const char *filepath);
+bool check_file(
+    char const *prog_name, const char *filepath, int fd, struct stat *stats);
+int open_file(char const *prog_name, const char *filepath);
 
 bool file_is_object(
     const char *prog_name, const char *filepath, void *file_address);

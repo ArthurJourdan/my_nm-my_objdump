@@ -10,12 +10,14 @@
 #include "nm.h"
 #include "file_memory.h"
 
+static const char *prog_name = "nm";
+
 bool my_nm(bool print_filepath, const char *filepath)
 {
     struct stat my_stats;
-    void *my_file_address = load_file(filepath, &my_stats);
+    void *my_file_address = load_file(prog_name, filepath, &my_stats);
 
-    if (!file_is_object("nm", filepath, my_file_address))
+    if (!file_is_object(prog_name, filepath, my_file_address))
         return false;
     if (print_filepath)
         printf("\n%s:\n", filepath);

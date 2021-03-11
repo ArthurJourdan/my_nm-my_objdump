@@ -9,12 +9,14 @@
 #include "objdump.h"
 #include "file_memory.h"
 
+static const char *prog_name = "objdump";
+
 bool my_objdump(const char *filepath)
 {
     struct stat my_stats;
-    void *my_file_address = load_file(filepath, &my_stats);
+    void *my_file_address = load_file(prog_name, filepath, &my_stats);
 
-    if (!file_is_object("objdump", filepath, my_file_address))
+    if (!file_is_object(prog_name, filepath, my_file_address))
         return false;
     printf("\n%s:\t", filepath);
     launch_architecture_objdump(my_file_address);
