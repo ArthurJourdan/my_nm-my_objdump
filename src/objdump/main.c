@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2021
 ** main.c
 ** File description:
-** main for my_nm
+** main for my_objdump
 */
 
 #include "my.h"
-#include "nm.h"
+#include "objdump.h"
 
 int main(int ac, char const *av[])
 {

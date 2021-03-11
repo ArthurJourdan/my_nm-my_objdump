@@ -75,6 +75,10 @@ MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
 
 SRC_OBJDUMP			=		\
 						${OBJDUMP_DIR}main_objdump.c	\
+						${OBJDUMP_DIR}get_function_architecture.c	\
+						${OBJDUMP_DIR}objdump_64b.c	\
+						${OBJDUMP_DIR}print_section_name.c	\
+						${OBJDUMP_DIR}print_section_body.c	\
 						# ${OBJDUMP_DIR}example.c
 
 OBJ_OBJDUMP			=	$(COMMON_SRC:.c=.o)
