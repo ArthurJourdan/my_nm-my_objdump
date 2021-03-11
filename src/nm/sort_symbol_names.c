@@ -7,7 +7,6 @@
 
 #include "nm.h"
 #include <string.h>
-#include <locale.h>
 
 static int check_sort(const void *sym_1, const void *sym_2)
 {
@@ -16,7 +15,6 @@ static int check_sort(const void *sym_1, const void *sym_2)
 
     if (!my_name_1 || !my_name_2)
         return 0;
-    setlocale(LC_ALL, "en_GB");
     return strcoll(my_name_1, my_name_2);
 }
 

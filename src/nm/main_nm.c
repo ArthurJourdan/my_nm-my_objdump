@@ -5,6 +5,7 @@
 ** main functions of nm program
 */
 
+#include <locale.h>
 #include "my.h"
 #include "nm.h"
 #include "file_memory.h"
@@ -33,6 +34,7 @@ bool my_nms(int ac, char const *filepaths[])
     else if (ac == 1) {
         filepaths[ac++] = "a.out";
     }
+    setlocale(LC_ALL, "en_US");
     for (int my_ac = 1; my_ac < ac; my_ac++) {
         if (!my_nm(print_filepath, filepaths[my_ac])) {
             exit_value = false;

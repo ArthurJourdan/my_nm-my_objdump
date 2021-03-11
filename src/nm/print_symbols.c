@@ -17,7 +17,7 @@ void print_symbol(symbol_t to_print)
     if (to_print.address)
         printf("%016lx", to_print.address);
     else {
-        printf("\t\t");
+        printf("%16s", " ");
     }
     printf(" %c %s\n", to_print.type, to_print.name);
 }
