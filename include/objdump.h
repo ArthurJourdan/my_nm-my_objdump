@@ -13,6 +13,12 @@
 #include <elf.h>
 #include <fcntl.h>
 
+typedef struct
+{
+    int flag;
+    char *name;
+} map_flag_t;
+
 typedef struct symbol_printing_infos
 {
     size_t address;
@@ -27,6 +33,8 @@ bool launch_architecture_objdump(void *file_address);
 
 bool objdump_64(void *header);
 bool objdump_32(void *header);
+
+void print_infos_64(Elf64_Ehdr *header);
 
 void print_section_name_64(
     Elf64_Ehdr *header, Elf64_Shdr *sections, Elf64_Shdr *act_section);

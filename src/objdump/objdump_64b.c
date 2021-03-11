@@ -33,6 +33,7 @@ bool objdump_64(void *header)
 {
     Elf64_Ehdr *my_header = header;
 
+    print_infos_64(header);
     print_sections(my_header);
 
     return true;

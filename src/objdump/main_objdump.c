@@ -16,7 +16,7 @@ bool my_objdump(const char *filepath)
 
     if (!file_is_object("objdump", filepath, my_file_address))
         return false;
-    // print_infos(filepath, my_file_address);
+    printf("\n%s:\t", filepath);
     launch_architecture_objdump(my_file_address);
     release_file(my_file_address, my_stats);
     return true;
