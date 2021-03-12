@@ -12,7 +12,8 @@
 
 void print_symbol(symbol_t to_print)
 {
-    if (to_print.type == '?' || !to_print.name || !strlen(to_print.name))
+    if (to_print.type == '?' || !to_print.name || !strlen(to_print.name)
+        || to_print.type == 'a')
         return;
     if (to_print.address)
         printf("%016lx", to_print.address);
