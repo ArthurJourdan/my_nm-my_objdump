@@ -8,6 +8,27 @@
 #include "my.h"
 #include "objdump.h"
 
+static bool section_to_print(Elf32_Shdr act_section)
+{
+    if (!act_section.sh_size) {
+        return false;
+    }
+    if (act_section.sh_type == SHT_NOBITS) {
+        return false;
+    }
+    if (act_section.sh_type == SHT_PROGBITS
+        || act_section.sh_type == SHT_NOTE) {
+        return true;
+    }
+    if ((act_section.sh_flags & SHF_ALLOC) == SHF_ALLOC) {
+        return true;
+    }
+    if ((act_section.sh_flags & SHF_WRITE) == SHF_WRITE) {
+        return true;
+    }
+    return false;
+}
+
 static void print_section(
     Elf32_Ehdr *header, Elf32_Shdr *sections, Elf32_Shdr *act_section)
 {
@@ -21,8 +42,7 @@ static Elf32_Shdr *print_sections(Elf32_Ehdr *header)
         (Elf32_Shdr *) ((size_t) header + header->e_shoff);
 
     for (size_t i = 1; i < header->e_shnum; i++) {
-        if (my_sections[i].sh_type == SHT_SYMTAB
-            || my_sections[i].sh_type == SHT_STRTAB)
+        if (!section_to_print(my_sections[i]))
             continue;
         print_section(header, my_sections, &my_sections[i]);
     }

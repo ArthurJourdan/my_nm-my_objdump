@@ -23,16 +23,17 @@ static void print_16_bytes(Elf32_Ehdr *header, Elf32_Shdr *act_section,
 static void print_line(
     Elf32_Ehdr *header, Elf32_Shdr *act_section, size_t act_offset)
 {
-    printf(" %04x", (unsigned int) act_offset);
+    printf(
+        " %04lx", act_section->sh_addr + act_offset - act_section->sh_offset);
     print_16_bytes(header, act_section, act_offset, print_hexa);
-    printf(" ");
+    printf("  ");
     print_16_bytes(header, act_section, act_offset, print_ascii);
     printf("\n");
 }
 
 void print_section_body_32(Elf32_Ehdr *header, Elf32_Shdr *act_section)
 {
-    size_t my_offset = (size_t)(act_section->sh_offset);
+    size_t my_offset = act_section->sh_offset;
     size_t my_section_end = (size_t)(my_offset + act_section->sh_size);
 
     while (my_offset < my_section_end) {

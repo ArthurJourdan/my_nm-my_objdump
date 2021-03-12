@@ -11,11 +11,11 @@
 void print_ascii(
     size_t act_offset, size_t section_end, uint8_t *line, size_t i)
 {
-    if (section_end < act_offset + i) {
+    if (section_end < act_offset + i + 1) {
         printf(" ");
         return;
     }
-    if (line[i] > ' ' && line[i] < '~')
+    if (line[i] >= ' ' && line[i] <= '~')
         printf("%c", line[i]);
     else
         printf(".");
@@ -25,7 +25,7 @@ void print_hexa(size_t act_offset, size_t section_end, uint8_t *line, size_t i)
 {
     if (i % 4 == 0)
         printf(" ");
-    if (section_end < act_offset + i) {
+    if (section_end < act_offset + i + 1) {
         printf("  ");
         return;
     }

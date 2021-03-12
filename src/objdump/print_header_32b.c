@@ -35,7 +35,7 @@ static void print_flags(Elf32_Ehdr *header)
     unsigned int my_flags = get_flags(header);
     bool my_print_several = false;
 
-    printf("flags 0x%08x\n", my_flags);
+    printf("flags 0x%08x:\n", my_flags);
     for (uint i = 0; i < ARRAY_SIZE(flag_list); i++) {
         if (my_flags & flag_list[i].flag) {
             if (my_print_several)

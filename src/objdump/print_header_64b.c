@@ -35,7 +35,7 @@ static void print_flags(Elf64_Ehdr *header)
     unsigned int my_flags = get_flags(header);
     bool my_print_several = false;
 
-    printf("flags 0x%08x\n", my_flags);
+    printf("flags 0x%08x:\n", my_flags);
     for (uint i = 0; i < ARRAY_SIZE(flag_list); i++) {
         if (my_flags & flag_list[i].flag) {
             if (my_print_several)
@@ -49,7 +49,7 @@ static void print_flags(Elf64_Ehdr *header)
 
 void print_infos_64(Elf64_Ehdr *header)
 {
-    printf("file format elf64-i386\n");
+    printf("file format elf64-x86-64\n");
     printf("architecture: i386:x86-64, ");
     print_flags(header);
     printf("start address 0x%016x", (unsigned int) header->e_entry);
