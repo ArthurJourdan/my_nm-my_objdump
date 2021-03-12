@@ -55,10 +55,13 @@ MAIN_NM			=	${NM_DIR}main.c
 SRC_NM			=	\
 					${NM_DIR}main_nm.c	\
 					${NM_DIR}get_function_architecture_nm.c	\
-					${NM_DIR}nm_32b.c	\
 					${NM_DIR}nm_64b.c	\
-					${NM_DIR}get_symbol_char_32b.c	\
+					${NM_DIR}nm_32b.c	\
 					${NM_DIR}get_symbol_char_64b.c	\
+					${NM_DIR}get_symbol_char_32b.c	\
+					${NM_DIR}manip_symbols.c	\
+					${NM_DIR}manip_symbols_64b.c	\
+					${NM_DIR}manip_symbols_32b.c	\
 					${NM_DIR}sort_symbol_names.c	\
 					${NM_DIR}print_symbols.c	\
 				# ${NM_DIR}example.c
