@@ -78,7 +78,8 @@ SRC_OBJDUMP			=		\
 						${OBJDUMP_DIR}get_function_architecture_objdump.c	\
 						${OBJDUMP_DIR}objdump_64b.c	\
 						${OBJDUMP_DIR}objdump_32b.c	\
-						${OBJDUMP_DIR}print_infos.c	\
+						${OBJDUMP_DIR}print_header_64b.c	\
+						${OBJDUMP_DIR}print_header_32b.c	\
 						${OBJDUMP_DIR}print_section_name_64b.c	\
 						${OBJDUMP_DIR}print_section_name_32b.c	\
 						${OBJDUMP_DIR}print_section_body.c	\

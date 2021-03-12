@@ -35,6 +35,7 @@ bool objdump_64(void *header);
 bool objdump_32(void *header);
 
 void print_infos_64(Elf64_Ehdr *header);
+void print_infos_32(Elf32_Ehdr *header);
 
 void print_section_name_64(
     Elf64_Ehdr *header, Elf64_Shdr *sections, Elf64_Shdr *act_section);

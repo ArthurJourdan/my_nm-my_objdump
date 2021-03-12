@@ -21,14 +21,18 @@ static const map_flag_t flag_list[10] = {{BFD_NO_FLAGS, "BFD_NO_FLAGS"},
     {WP_TEXT, "WP_TEXT"},
     {D_PAGED, "D_PAGED"}};
 
-static void print_start_address(Elf64_Ehdr *header)
+static unsigned int get_flags(Elf32_Ehdr *header)
 {
-    printf("start address 0x%016x", (unsigned int) header->e_entry);
+    switch (header->e_type) {
+        case ET_REL: return 0x11;
+        case ET_EXEC: return 0x112;
+        default: return 0x150;
+    }
 }
 
-static void print_flags(Elf64_Ehdr *header)
+static void print_flags(Elf32_Ehdr *header)
 {
-    unsigned int my_flags = header->e_flags;
+    unsigned int my_flags = get_flags(header);
     bool my_print_several = false;
 
     printf("flags 0x%08x\n", my_flags);
@@ -43,22 +47,11 @@ static void print_flags(Elf64_Ehdr *header)
     printf("\n");
 }
 
-static void print_architecture(void)
+void print_infos_32(Elf32_Ehdr *header)
 {
-    printf("architecture: ");
-    printf("i386:x86-64, ");
-}
-
-static void print_file_format(void)
-{
-    printf("file format elf64-x86-64\n");
-}
-
-void print_infos_64(Elf64_Ehdr *header)
-{
-    print_file_format();
-    print_architecture();
+    printf("file format elf32-i386\n");
+    printf("architecture: i386, ");
     print_flags(header);
-    print_start_address(header);
+    printf("start address 0x%016x", (unsigned int) header->e_entry);
     printf("\n\n");
 }
