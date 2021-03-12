@@ -11,11 +11,11 @@ static char get_symbol_char_from_sym(Elf32_Sym act_sym)
 {
     if (ELF32_ST_BIND(act_sym.st_info) == STB_GNU_UNIQUE)
         return 'u';
-    if (ELF32_ST_BIND(act_sym.st_info) == STB_WEAK)
+    if (ELF32_ST_BIND(act_sym.st_info) == STB_WEAK) {
+        if (ELF32_ST_TYPE(act_sym.st_info) == STT_OBJECT)
+            return (act_sym.st_shndx == SHN_UNDEF) ? 'v' : 'v';
         return (act_sym.st_shndx == SHN_UNDEF) ? 'w' : 'W';
-    if (ELF32_ST_BIND(act_sym.st_info) == STB_WEAK
-        && ELF32_ST_TYPE(act_sym.st_info) == STT_OBJECT)
-        return (act_sym.st_shndx == SHN_UNDEF) ? 'v' : 'V';
+    }
     if (act_sym.st_shndx == SHN_UNDEF)
         return 'U';
     if (act_sym.st_shndx == SHN_ABS)
