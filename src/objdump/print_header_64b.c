@@ -10,16 +10,16 @@
 #include "flags.h"
 #include "my.h"
 
-static const map_flag_t flag_list[10] = {{BFD_NO_FLAGS, "BFD_NO_FLAGS"},
-    {HAS_RELOC, "HAS_RELOC"},
-    {EXEC_P, "EXEC_P"},
-    {HAS_LINENO, "HAS_LINENO"},
-    {HAS_DEBUG, "HAS_DEBUG"},
-    {HAS_SYMS, "HAS_SYMS"},
-    {HAS_LOCALS, "HAS_LOCALS"},
-    {DYNAMIC, "DYNAMIC"},
-    {WP_TEXT, "WP_TEXT"},
-    {D_PAGED, "D_PAGED"}};
+static const map_flag_t flag_list[10] = {{0x00, "BFD_NO_FLAGS"},
+    {0x01, "HAS_RELOC"},
+    {0x02, "EXEC_P"},
+    {0x04, "HAS_LINENO"},
+    {0x08, "HAS_DEBUG"},
+    {0x10, "HAS_SYMS"},
+    {0x20, "HAS_LOCALS"},
+    {0x40, "DYNAMIC"},
+    {0x80, "WP_TEXT"},
+    {0x100, "D_PAGED"}};
 
 static unsigned int get_flags(Elf64_Ehdr *header)
 {
