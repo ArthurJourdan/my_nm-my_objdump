@@ -7,9 +7,11 @@
 
 #include "file_memory.h"
 
-int get_file_architecture(void *header)
+int get_file_architecture(void *address)
 {
-    Elf32_Ehdr *address = header;
+    Elf32_Ehdr *header = address;
 
-    return address->e_ident[EI_CLASS];
+    if (!header)
+        return -1;
+    return header->e_ident[EI_CLASS];
 }

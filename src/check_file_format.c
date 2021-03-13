@@ -12,17 +12,21 @@
 static const int accepted_types[3] = {ET_REL, ET_EXEC, ET_DYN};
 
 bool file_is_object(
-    const char *prog_name, const char *filepath, void *file_address)
+    const char *prog_name, const char *filepath, void *address, size_t size)
 {
-    if (!file_address) {
+    if (!address) {
         return false;
     }
-    if (file_address == MAP_FAILED) {
+    if (address == MAP_FAILED) {
         perror("mmap");
         return false;
     }
-    if (!check_object_type(file_address)) {
+    if (!check_object_type(address)) {
         print_error(prog_name, get_error(WRONG_FILE_FORMAT), filepath);
+        return false;
+    }
+    if (!check_file_memory(address, size)) {
+        print_error(prog_name, get_error(FILE_TRUNCATED), filepath);
         return false;
     }
     return true;

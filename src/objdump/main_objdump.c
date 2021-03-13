@@ -16,7 +16,8 @@ bool my_objdump(const char *filepath)
     struct stat my_stats;
     void *my_file_address = load_file(prog_name, filepath, &my_stats);
 
-    if (!file_is_object(prog_name, filepath, my_file_address))
+    if (!file_is_object(
+            prog_name, filepath, my_file_address, my_stats.st_size))
         return false;
     printf("\n%s:%5s", filepath, " ");
     launch_architecture_objdump(my_file_address);

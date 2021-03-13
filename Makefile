@@ -44,6 +44,7 @@ SRC_DIR		=	./src/
 
 COMMON_SRC	=	${SRC_DIR}error_handling.c	\
 				${SRC_DIR}check_file.c	\
+				${SRC_DIR}check_file_memory.c	\
 				${SRC_DIR}load_file.c	\
 				${SRC_DIR}check_file_format.c	\
 				${SRC_DIR}get_file_architecture.c	\

@@ -23,7 +23,8 @@ bool check_file(
 int open_file(char const *prog_name, const char *filepath);
 
 bool file_is_object(
-    const char *prog_name, const char *filepath, void *file_address);
+    const char *prog_name, const char *filepath, void *address, size_t size);
+bool check_file_memory(void *address, size_t size);
 bool check_object_type(void *header);
 
 int get_file_architecture(void *header);
