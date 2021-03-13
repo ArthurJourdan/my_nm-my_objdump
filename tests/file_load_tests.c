@@ -19,7 +19,7 @@ Test(load_file, basic_load, .timeout = timeout, .disabled = MY_DISABLEMENT,
 {
     char *my_file = "./unit_tests";
     struct stat my_stats;
-    void *my_address = load_file(my_file, &my_stats);
+    void *my_address = load_file("nm", my_file, &my_stats);
 
     cr_assert_not_null(my_address);
     cr_assert_neq(my_address, MAP_FAILED);
@@ -34,7 +34,7 @@ Test(load_file, directory, .timeout = timeout, .disabled = MY_DISABLEMENT,
     char *my_expected;
     struct stat my_stats;
 
-    cr_assert_null(load_file(my_file, &my_stats));
+    cr_assert_null(load_file("nm", my_file, &my_stats));
     asprintf(&my_expected, my_format, my_file);
     cr_assert_stderr_eq_str(my_expected);
 }
@@ -47,7 +47,7 @@ Test(load_file, file_unknown, .timeout = timeout, .disabled = MY_DISABLEMENT,
     char *my_expected;
     struct stat my_stats;
 
-    cr_assert_null(load_file(my_file, &my_stats));
+    cr_assert_null(load_file("nm", my_file, &my_stats));
     asprintf(&my_expected, my_format, my_file);
     cr_assert_stderr_eq_str(my_expected);
 }

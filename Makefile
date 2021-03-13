@@ -54,7 +54,7 @@ MAIN_NM			=	${NM_DIR}main.c
 
 SRC_NM			=	\
 					${NM_DIR}main_nm.c	\
-					${NM_DIR}get_function_architecture_nm.c	\
+					${NM_DIR}get_fct_archi_nm.c	\
 					${NM_DIR}nm_64b.c	\
 					${NM_DIR}nm_32b.c	\
 					${NM_DIR}get_symbol_char_64b.c	\
@@ -78,7 +78,7 @@ MAIN_OBJDUMP		=	${OBJDUMP_DIR}main.c
 
 SRC_OBJDUMP			=		\
 						${OBJDUMP_DIR}main_objdump.c	\
-						${OBJDUMP_DIR}get_function_architecture_objdump.c	\
+						${OBJDUMP_DIR}get_fct_archi_objdump.c	\
 						${OBJDUMP_DIR}objdump_64b.c	\
 						${OBJDUMP_DIR}objdump_32b.c	\
 						${OBJDUMP_DIR}print_header_64b.c	\
