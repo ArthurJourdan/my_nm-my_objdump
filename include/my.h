@@ -25,26 +25,27 @@
 #include <sys/wait.h>
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
-#define MAX(a, b) ((a > b) ? a : b)
-#define MIN(a, b) ((a < b) ? a : b)
+#define MAX(a, b)     ((a > b) ? a : b)
+#define MIN(a, b)     ((a < b) ? a : b)
 
 #undef EXIT_FAILURE
 #define EXIT_FAILURE (84)
 
 // ATTRIBUTES
-#define N_U __attribute__((unused))
-#define UNUSED __attribute__((unused))
-#define PURE __attribute__((pure))
+#define N_U         __attribute__((unused))
+#define UNUSED      __attribute__((unused))
+#define PURE        __attribute__((pure))
 #define CONSTRUCTOR __attribute__((constructor))
-#define DESTRUCTOR __attribute__((destructor))
-#define INLINE __attribute__((always_inline))
-#define NO_INLINE __attribute__((noinline))
-#define CONST __attribute__((const))
-#define MALLOC __attribute__((malloc))
-#define NO_RETURN __attribute__((noreturn))
+#define DESTRUCTOR  __attribute__((destructor))
+#define INLINE      __attribute__((always_inline))
+#define NO_INLINE   __attribute__((noinline))
+#define CONST       __attribute__((const))
+#define MALLOC      __attribute__((malloc))
+#define NO_RETURN   __attribute__((noreturn))
 // !ATTRIBUTES
 
-typedef struct {
+typedef struct
+{
     int x;
     int y;
 } vector_t;
@@ -57,7 +58,7 @@ size_t my_arrlen(char **arr);
 size_t my_triplearrlen(char **arr[]);
 size_t my_len_tot(char const *str);
 size_t my_int_arr_len(int *arr);
-size_t my_strlen_until_word(char * const str, char * const word);
+size_t my_strlen_until_word(char *const str, char *const word);
 // !LEN
 
 // IS IT THAT
@@ -71,10 +72,10 @@ bool my_char_is_nothing(char const c, bool alpha, bool num, bool up);
 bool my_str_is_nothing(char const *str);
 bool my_quotation_is_nothing(char const *str);
 
-bool my_str_is_chars(char * const str, size_t ac, ...);
+bool my_str_is_chars(char *const str, size_t ac, ...);
 
-bool my_str_has_char(char * const str, char c);
-bool my_str_has_chars(char * const str, size_t ac, ...);
+bool my_str_has_char(char *const str, char c);
+bool my_str_has_chars(char *const str, size_t ac, ...);
 // !IS IT THAT
 
 bool error_msg(int ac, char **av);
@@ -87,7 +88,6 @@ ssize_t biggest_in_double_arr(char **src);
 // CMP
 // !CHECK
 
-
 // NUM
 int my_getnbr(char *str);
 float my_getfloat(char *str);
@@ -97,7 +97,6 @@ char *my_reg_nbr(int nb);
 bool invert_bool(bool my_bool);
 int invert_int(int nb);
 // !NUM
-
 
 // MODIF
 
@@ -111,7 +110,6 @@ char *my_strcat_tot(size_t ac, ...);
 char **my_two_str_to_arr(char *str1, char *str2, bool free);
 // !CONCATENATE
 
-
 // CPY
 char *my_strcpy(char *str);
 char *my_str_n_cpy(char *str, size_t size);
@@ -122,7 +120,7 @@ char *my_str_cpy_quotation(char *str, bool double_q, bool simple, bool magic);
 char **double_char_arr_cpy(char **src, bool free);
 void double_char_arr_dup(char **src, char **new);
 
-char *cpy_nth_word_in_str(char * const str, size_t n);
+char *cpy_nth_word_in_str(char *const str, size_t n);
 // !CPY
 
 // MANIPULATE ARR
@@ -134,8 +132,8 @@ char **remove_str_to_arr(char **arr, size_t index_str, bool to_free);
 char *my_word_arr_to_str(char **arr);
 char **my_str_to_word_arr(char *str);
 
-char **my_sep_parser(char * const str, char * const sep);
-char **my_n_sep_parser(char * const str, char **seps);
+char **my_sep_parser(char *const str, char *const sep);
+char **my_n_sep_parser(char *const str, char **seps);
 
 char **arr_from_hard_quote(size_t ac, ...);
 // !CHANGE TYPE
