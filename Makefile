@@ -32,7 +32,7 @@ CC			= 	@gcc
 
 INCLUDE		=	-I include
 
-C_FLAGS		=	-W -Wall -Wextra $(INCLUDE)
+CFLAGS		=	-W -Wall -Wextra $(INCLUDE)
 
 RM_FLAGS	=	*.gcda *.gcno src/*.gcda src/*.gcno
 
@@ -118,7 +118,7 @@ TEST_OBJ	+=	$(TEST_FILES:.c=.o)
 ## Rules
 
 ## Messages
-MSG_POST_BUILD	=	@$(ECHO) $(BOLD) $(YELLOW) Built $(NAME) $(WHITE) "\t$(C_FLAGS)" $(DEFAULT)
+MSG_POST_BUILD	=	@$(ECHO) $(BOLD) $(YELLOW) Built $(NAME) $(WHITE) "\t$(CFLAGS)" $(DEFAULT)
 
 MSG_BUILD_SUCCESS	= 	$(ECHO) $(BOLD) $(GREEN)"\n-> BUILD SUCCESS"$(YELLOW)"\n\t\t\t"
 
@@ -179,6 +179,7 @@ fclean:		clean
 
 re:		 fclean all
 
+tests_run:	CFLAGS += --coverage
 tests_run:	fclean lib $(TEST_OBJ)
 			@$(ECHO)
 			$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(TEST_FLAGS) $(LD_FLAGS) \
@@ -192,11 +193,11 @@ tests_run:	fclean lib $(TEST_OBJ)
 			fi
 			@$(ECHO)
 
-debug:		C_FLAGS += -g
+debug:		CFLAGS += -g
 debug:		re
 
 %.o :		%.c
-			$(CC) -c -o $@ $^ $(C_FLAGS) \
+			$(CC) -c -o $@ $^ $(CFLAGS) \
 			&& $(MSG_COMPILATION_SUCCESS) \
 			|| $(MSG_COMPILATION_FAILURE) \
 			&& $(ECHO) $(BOLD) $< | rev | cut -d'/' --fields="1 2" | rev
