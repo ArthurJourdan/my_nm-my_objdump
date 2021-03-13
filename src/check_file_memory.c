@@ -18,10 +18,10 @@ static bool check_file_memory_64(Elf64_Ehdr *header, size_t size)
 {
     Elf64_Shdr *my_sections = (Elf64_Shdr *) (header + header->e_shoff);
 
-    if (check_file_end(header, size, my_sections)) {
+    if (!check_file_end(header, size, my_sections)) {
         return false;
     }
-    if (check_file_end(header, size, &my_sections[header->e_shnum])) {
+    if (!check_file_end(header, size, &my_sections[header->e_shnum])) {
         return false;
     }
     return true;
@@ -31,10 +31,10 @@ static bool check_file_memory_32(Elf32_Ehdr *header, size_t size)
 {
     Elf32_Shdr *my_sections = (Elf32_Shdr *) (header + header->e_shoff);
 
-    if (check_file_end(header, size, my_sections)) {
+    if (!check_file_end(header, size, my_sections)) {
         return false;
     }
-    if (check_file_end(header, size, &my_sections[header->e_shnum])) {
+    if (!check_file_end(header, size, &my_sections[header->e_shnum])) {
         return false;
     }
     return true;

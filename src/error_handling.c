@@ -13,7 +13,7 @@ static const struct err_id_msg errors[] = {
     {FILE_NOT_FOUND, "'%s': No such file"},
     {WRONG_FILE_FORMAT, "%s: file format not recognized"},
     {FILE_IS_DIR, "Warning: '%s' is a directory"},
-    {FILE_TRUNCATED, "%s:File truncated"}};
+    {FILE_TRUNCATED, "%s: File truncated"}};
 
 const char *get_error(errorId id)
 {
