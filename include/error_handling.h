@@ -15,7 +15,8 @@ typedef enum error_identifier
     FILE_NOT_FOUND,
     WRONG_FILE_FORMAT,
     FILE_IS_DIR,
-    FILE_TRUNCATED
+    FILE_TRUNCATED,
+    NO_SYMBOLS
 } errorId;
 
 struct err_id_msg

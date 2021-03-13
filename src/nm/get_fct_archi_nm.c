@@ -26,6 +26,5 @@ bool launch_architecture_nm(void *file_address)
 
     if (!my_function)
         return false;
-    my_function(file_address);
-    return true;
+    return my_function(file_address);
 }
