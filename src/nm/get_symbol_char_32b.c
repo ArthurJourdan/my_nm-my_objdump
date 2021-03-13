@@ -13,7 +13,7 @@ static char get_symbol_char_from_sym(Elf32_Sym act_sym)
         return 'u';
     if (ELF32_ST_BIND(act_sym.st_info) == STB_WEAK) {
         if (ELF32_ST_TYPE(act_sym.st_info) == STT_OBJECT)
-            return (act_sym.st_shndx == SHN_UNDEF) ? 'v' : 'v';
+            return (act_sym.st_shndx == SHN_UNDEF) ? 'v' : 'V';
         return (act_sym.st_shndx == SHN_UNDEF) ? 'w' : 'W';
     }
     if (act_sym.st_shndx == SHN_UNDEF)
@@ -41,7 +41,7 @@ static char get_symbol_char_from_shdr(Elf32_Sym act_sym, Elf32_Shdr *act_sect)
         return 'T';
     if (act_sect[act_sym.st_shndx].sh_type == SHT_DYNAMIC)
         return 'D';
-    return '\0';
+    return 'D';
 }
 
 char get_symbol_char_32(Elf32_Sym act_sym, Elf32_Shdr *act_sect)
