@@ -35,7 +35,7 @@ symbol_t get_symbol_32(Elf32_Ehdr *header, Elf32_Shdr *section_header,
         + section_header[symbol_table->sh_link].sh_offset);
 
     my_sym_name = &my_sym_name[symbol.st_name];
-    my_sym_print.address = symbol.st_value;
+    my_sym_print.value = symbol.st_value;
     my_sym_print.type = get_symbol_char_32(symbol, section_header);
     my_sym_print.name = my_sym_name;
     return my_sym_print;

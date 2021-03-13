@@ -30,12 +30,13 @@ size_t get_nb_symbols_64(Elf64_Ehdr *header, Elf64_Shdr *sections)
 symbol_t get_symbol_64(Elf64_Ehdr *header, Elf64_Shdr *section_header,
     Elf64_Shdr *symbol_table, Elf64_Sym symbol)
 {
-    symbol_t my_sym_print;
+    symbol_t my_sym_print = {(size_t) -1, '\0', NULL};
     char *my_sym_name = my_sym_name = (char *) ((size_t) header
         + section_header[symbol_table->sh_link].sh_offset);
 
     my_sym_name = &my_sym_name[symbol.st_name];
-    my_sym_print.address = symbol.st_value;
+    if (symbol.st_value || symbol.st_shndx != SHN_UNDEF)
+        my_sym_print.value = symbol.st_value;
     my_sym_print.type = get_symbol_char_64(symbol, section_header);
     my_sym_print.name = my_sym_name;
     return my_sym_print;

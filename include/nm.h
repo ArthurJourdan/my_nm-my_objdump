@@ -15,7 +15,7 @@
 
 typedef struct symbol_printing_infos
 {
-    size_t address;
+    size_t value;
     char type;
     char *name;
 } symbol_t;
