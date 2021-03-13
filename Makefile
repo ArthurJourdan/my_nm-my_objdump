@@ -34,7 +34,7 @@ INCLUDE		=	-I include
 
 CFLAGS		=	-W -Wall -Wextra $(INCLUDE)
 
-RM_FLAGS	=	*.gcda *.gcno src/*.gcda src/*.gcno
+RM_EXTENSIONS	=	*.gcda *.gcno
 
 RM			=	@rm -rf
 ## !Shortcut / unity of variables
@@ -156,8 +156,12 @@ objdump:	$(OBJ_OBJDUMP)
 			@($(ECHO))
 			@($(ECHO))
 
-clean:
-			$(RM) $(RM_FLAGS)
+clean_useless:
+			@for RM_EXTENSION in $(RM_EXTENSIONS) ; do \
+				find src -name $$RM_EXTENSION -type f -delete ;\
+			done
+
+clean:		clean_useless
 			$(RM) $(OBJ_NM)
 			@($(MSG_CLEAN)$(NAME_NM)$(DEFAULT))
 			$(RM) $(OBJ_OBJDUMP)
