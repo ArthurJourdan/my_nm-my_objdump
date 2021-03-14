@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "objdump.h"
-#include "flags.h"
 #include "my.h"
 
 static const map_flag_t flag_list[10] = {{0x00, "BFD_NO_FLAGS"},
