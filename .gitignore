@@ -20,6 +20,7 @@ unit_tests
 *#*
 *~
 *.vscode*
+.idea
 # !TEMPORARY
 
 # MY_THINGS
